@@ -9,11 +9,11 @@ from config import OPTION_A_MAP, OPTION_B_MAP, HUMAN_LABELS, OPTION_B_LABELS
 
 EXCEL_PATH = "../Prevention_dataset evaluation.xlsx"
 
-
-
 def plot_and_print(y_true, y_pred, labels, title, filename):
     cm = confusion_matrix(y_true, y_pred, labels=labels)
+    print(f"\n{'='*60}")
     print(f"  {title}")
+    print(f"{'='*60}")
     print("\nClassification Report:")
     print(classification_report(y_true, y_pred, labels=labels, zero_division=0))
 
@@ -75,7 +75,9 @@ def main():
     present_b_labels = [l for l in OPTION_B_LABELS if l in y_b_raw.values]
     present_human_labels = [l for l in HUMAN_LABELS if l in y_human.values]
 
+    print(f"\n{'='*60}")
     print("  Option B raw label distribution vs Human Labels")
+    print(f"{'='*60}")
     cross_tab = pd.crosstab(
         y_human, y_b_raw, rownames=["Human"], colnames=["Option B"]
     )
@@ -83,8 +85,10 @@ def main():
     cross_tab.to_csv("optionb_crosstab.csv")
     print("\nSaved cross-tabulation: optionb_crosstab.csv")
 
-    #Summary of agreement
+    # --- Summary of agreement ---
+    print(f"\n{'='*60}")
     print("  Summary")
+    print(f"{'='*60}")
     agree_a = (y_human[mask_a].values == y_a[mask_a].values).mean()
     agree_b = (y_human[mask_b].values == y_b_collapsed[mask_b].values).mean()
     print(f"Option A overall accuracy: {agree_a:.1%}")

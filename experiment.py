@@ -1,8 +1,18 @@
+import os
+import sys
 import pandas as pd
 from config import OPTION_A_CRITERIA, OPTION_B_CRITERIA
 from typesafe_sdk import Choice, TypeSafeClient
 
 EXCEL_PATH = "../Prevention_dataset evaluation.xlsx"
+
+_API_KEY = os.environ.get("TYPESAFE_API_KEY")
+if not _API_KEY:
+    sys.exit(
+        "Error: TYPESAFE_API_KEY environment variable is not set.\n"
+        "In GitHub Codespaces, go to Settings → Secrets and add TYPESAFE_API_KEY, "
+        "then rebuild or reload the codespace."
+    )
 
 def label_text(client: TypeSafeClient, text: str, criteria: dict, question_key: str) -> str:
     response = client.system_one(
