@@ -7,7 +7,7 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 from config import OPTION_A_MAP, OPTION_B_MAP, HUMAN_LABELS, OPTION_B_LABELS
 
-EXCEL_PATH = "../p_eval_set.xlsx"
+EXCEL_PATH = "p_eval_set.xlsx"
 
 def plot_and_print(y_true, y_pred, labels, title, filename):
     cm = confusion_matrix(y_true, y_pred, labels=labels)
